@@ -1,0 +1,230 @@
+{
+  "timestamp": "2026-02-23T00:26:19+01:00",
+  "hostname": "DESKTOP-3H5R52N",
+  "cpu_percent": 87.18446601941747,
+  "memory": {
+    "total": 8480120832,
+    "available": 1626923008,
+    "used": 6853197824,
+    "usedPercent": 80,
+    "free": 1626923008,
+    "active": 0,
+    "inactive": 0,
+    "wired": 0,
+    "laundry": 0,
+    "buffers": 0,
+    "cached": 0,
+    "writeBack": 0,
+    "dirty": 0,
+    "writeBackTmp": 0,
+    "shared": 0,
+    "slab": 0,
+    "sreclaimable": 0,
+    "sunreclaim": 0,
+    "pageTables": 0,
+    "swapCached": 0,
+    "commitLimit": 0,
+    "committedAS": 0,
+    "highTotal": 0,
+    "highFree": 0,
+    "lowTotal": 0,
+    "lowFree": 0,
+    "swapTotal": 0,
+    "swapFree": 0,
+    "mapped": 0,
+    "vmallocTotal": 0,
+    "vmallocUsed": 0,
+    "vmallocChunk": 0,
+    "hugePagesTotal": 0,
+    "hugePagesFree": 0,
+    "hugePagesRsvd": 0,
+    "hugePagesSurp": 0,
+    "hugePageSize": 0,
+    "anonHugePages": 0
+  },
+  "disk": {
+    "path": "/",
+    "fstype": "",
+    "total": 255404085248,
+    "free": 29196050432,
+    "used": 226208034816,
+    "usedPercent": 88.56868307190531,
+    "inodesTotal": 0,
+    "inodesUsed": 0,
+    "inodesFree": 0,
+    "inodesUsedPercent": 0
+  },
+  "network": [
+    {
+      "name": "all",
+      "bytesSent": 19941758,
+      "bytesRecv": 261984361,
+      "packetsSent": 177175,
+      "packetsRecv": 198092,
+      "errin": 0,
+      "errout": 0,
+      "dropin": 0,
+      "dropout": 0,
+      "fifoin": 0,
+      "fifoout": 0
+    }
+  ],
+  "top_processes": [
+    {
+      "pid": 7040,
+      "name": "gopls.exe",
+      "cpu_percent": 20.7258740726641,
+      "memory_percent": 0.56676626,
+      "cmdline": "C:\\Users\\dell\\go\\bin\\gopls.exe"
+    },
+    {
+      "pid": 15740,
+      "name": "msedgewebview2.exe",
+      "cpu_percent": 11.061250895170275,
+      "memory_percent": 0.87705314,
+      "cmdline": "\"C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\144.0.3719.115\\msedgewebview2.exe\" --type=renderer --noerrdialogs --user-data-dir=\"C:\\Users\\dell\\AppData\\Local\\Packages\\5319275A.WhatsAppDesktop_cv1g1gvanyjgm\\LocalCache\\EBWebView\" --webview-exe-name=WhatsApp.Root.exe --webview-exe-version=1.0.0 --embedded-browser-webview=1 --disable-gpu-compositing --video-capture-use-gpu-memory-buffer --lang=en-US --js-flags=--expose-gc --device-scale-factor=1.5 --num-raster-threads=2 --enable-main-frame-before-activation --renderer-client-id=34 --time-ticks-at-unix-epoch=-1771788186163053 --launch-time-ticks=14588751013 --ssd-no-pressure-read-main-dll --metrics-shmem-handle=5544,i,1275213261070792316,9687174319530235055,2097152 --field-trial-handle=1840,i,12608030099460488485,1328221396587637362,262144 --variations-seed-version --trace-process-track-uuid=3190709018171294360 --mojo-platform-channel-handle=5532 /prefetch:1"
+    },
+    {
+      "pid": 3396,
+      "name": "Code.exe",
+      "cpu_percent": 10.044184614303383,
+      "memory_percent": 3.6074717,
+      "cmdline": "\"C:\\Users\\dell\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe\" --type=renderer --user-data-dir=\"C:\\Users\\dell\\AppData\\Roaming\\Code\" --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --app-user-model-id=Microsoft.VisualStudioCode --app-path=\"C:\\Users\\dell\\AppData\\Local\\Programs\\Microsoft VS Code\\resources\\app\" --enable-sandbox --enable-blink-features=HighlightAPI --max-active-webgl-contexts=32 --disable-blink-features=FontMatchingCTMigration,StandardizedBrowserZoom, --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1.5 --num-raster-threads=2 --enable-main-frame-before-activation --renderer-client-id=4 --time-ticks-at-unix-epoch=-1771788186163054 --launch-time-ticks=13237182535 --field-trial-handle=1916,i,14199039253326288532,5100721262909300742,262144 --enable-features=DocumentPolicyIncludeJSCallStacksInCrashReports,EarlyEstablishGpuChannel,EnableTransparentHwndEnlargement,EstablishGpuChannelAsync --disable-features=CalculateNativeWinOcclusion,LocalNetworkAccessChecks,ScreenAIOCREnabled,SpareRendererForSitePerProcess,TraceSiteInstanceGetProcessCreation --variations-seed-version --trace-process-track-uuid=3190708990060038890 --mojo-platform-channel-handle=3396 --vscode-window-config=vscode:89f9eb4b-1ab9-428a-8c82-9233b9848a1e /prefetch:1"
+    },
+    {
+      "pid": 14588,
+      "name": "msedge.exe",
+      "cpu_percent": 7.629561109478752,
+      "memory_percent": 3.0686717,
+      "cmdline": "\"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe\" --type=renderer --pdf-upsell-enabled --video-capture-use-gpu-memory-buffer --lang=en-US --js-flags --device-scale-factor=1.5 --num-raster-threads=2 --enable-main-frame-before-activation --renderer-client-id=12 --time-ticks-at-unix-epoch=-1771788186163054 --launch-time-ticks=13256903486 --skip-read-main-dll --metrics-shmem-handle=6116,i,4088186901316178610,12603654173213803021,2097152 --field-trial-handle=2384,i,17055951786160419756,6160005449281271472,262144 --variations-seed-version --trace-process-track-uuid=3190708997556373682 --mojo-platform-channel-handle=6624 /prefetch:1"
+    },
+    {
+      "pid": 7136,
+      "name": "go.exe",
+      "cpu_percent": 6.907580869791022,
+      "memory_percent": 0.1652867,
+      "cmdline": "go list -e -json=Name,ImportPath,Error,Dir,GoFiles,IgnoredGoFiles,IgnoredOtherFiles,CFiles,CgoFiles,CXXFiles,MFiles,HFiles,FFiles,SFiles,SwigFiles,SwigCXXFiles,SysoFiles,TestGoFiles,XTestGoFiles,CompiledGoFiles,Export,DepOnly,Imports,ImportMap,TestImports,XTestImports,ForTest,DepsErrors,Module,EmbedFiles -compiled=true -test=true -export=false -deps=true -find=false -pgo=off -- C:\\Users\\dell\\OneDrive\\Desktop\\go_monitor\\... builtin"
+    },
+    {
+      "pid": 7124,
+      "name": "msedge.exe",
+      "cpu_percent": 6.606255518811224,
+      "memory_percent": 2.861701,
+      "cmdline": "\"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe\" --profile-directory=Default"
+    },
+    {
+      "pid": 13208,
+      "name": "msedgewebview2.exe",
+      "cpu_percent": 4.942927243448567,
+      "memory_percent": 1.2028447,
+      "cmdline": "\"C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\144.0.3719.115\\msedgewebview2.exe\" --embedded-browser-webview=1 --webview-exe-name=WhatsApp.Root.exe --webview-exe-version=1.0.0 --user-data-dir=\"C:\\Users\\dell\\AppData\\Local\\Packages\\5319275A.WhatsAppDesktop_cv1g1gvanyjgm\\LocalCache\\EBWebView\" --noerrdialogs --edge-webview-disable-crash-reporting=1 --embedded-browser-webview-enable-extension --disable-gpu --edge-webview-is-background --mojo-named-platform-channel-pipe=12600.13204.11144508906031765112"
+    },
+    {
+      "pid": 1256,
+      "name": "Code.exe",
+      "cpu_percent": 4.443315777121797,
+      "memory_percent": 3.443344,
+      "cmdline": "\"C:\\Users\\dell\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe\" --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --dns-result-order=ipv4first --experimental-network-inspection --inspect-port=0 --video-capture-use-gpu-memory-buffer --user-data-dir=\"C:\\Users\\dell\\AppData\\Roaming\\Code\" --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --field-trial-handle=1916,i,14199039253326288532,5100721262909300742,262144 --enable-features=DocumentPolicyIncludeJSCallStacksInCrashReports,EarlyEstablishGpuChannel,EnableTransparentHwndEnlargement,EstablishGpuChannelAsync --disable-features=CalculateNativeWinOcclusion,LocalNetworkAccessChecks,ScreenAIOCREnabled,SpareRendererForSitePerProcess,TraceSiteInstanceGetProcessCreation --variations-seed-version --trace-process-track-uuid=3190708992871164437 --mojo-platform-channel-handle=4300 /prefetch:8"
+    },
+    {
+      "pid": 14816,
+      "name": "msedge.exe",
+      "cpu_percent": 3.767139009194413,
+      "memory_percent": 2.566291,
+      "cmdline": "\"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe\" --type=renderer --extension-process --renderer-sub-type=extension --pdf-upsell-enabled --video-capture-use-gpu-memory-buffer --lang=en-US --js-flags --device-scale-factor=1.5 --num-raster-threads=2 --enable-main-frame-before-activation --renderer-client-id=7 --time-ticks-at-unix-epoch=-1771788186163054 --launch-time-ticks=13252069374 --skip-read-main-dll --metrics-shmem-handle=4352,i,13283331081396719470,1825078314365982235,2097152 --field-trial-handle=2384,i,17055951786160419756,6160005449281271472,262144 --variations-seed-version --trace-process-track-uuid=3190708992871164437 --mojo-platform-channel-handle=4280 /prefetch:2"
+    },
+    {
+      "pid": 16108,
+      "name": "Code.exe",
+      "cpu_percent": 3.0497667946563505,
+      "memory_percent": 1.742031,
+      "cmdline": "\"C:\\Users\\dell\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe\" --type=gpu-process --user-data-dir=\"C:\\Users\\dell\\AppData\\Roaming\\Code\" --gpu-preferences=SAAAAAAAAADgAAAEAAAAAAAAAAAAAGAAAQAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAACAAAAAAAAAAIAAAAAAAAAA== --field-trial-handle=1916,i,14199039253326288532,5100721262909300742,262144 --enable-features=DocumentPolicyIncludeJSCallStacksInCrashReports,EarlyEstablishGpuChannel,EnableTransparentHwndEnlargement,EstablishGpuChannelAsync --disable-features=CalculateNativeWinOcclusion,LocalNetworkAccessChecks,ScreenAIOCREnabled,SpareRendererForSitePerProcess,TraceSiteInstanceGetProcessCreation --variations-seed-version --trace-process-track-uuid=3190708988185955192 --mojo-platform-channel-handle=1912 /prefetch:2"
+    },
+    {
+      "pid": 13604,
+      "name": "msedgewebview2.exe",
+      "cpu_percent": 2.8160928645238976,
+      "memory_percent": 7.21731,
+      "cmdline": "\"C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\144.0.3719.115\\msedgewebview2.exe\" --type=renderer --noerrdialogs --user-data-dir=\"C:\\Users\\dell\\AppData\\Local\\Packages\\5319275A.WhatsAppDesktop_cv1g1gvanyjgm\\LocalCache\\EBWebView\" --webview-exe-name=WhatsApp.Root.exe --webview-exe-version=1.0.0 --embedded-browser-webview=1 --disable-gpu-compositing --video-capture-use-gpu-memory-buffer --lang=en-US --js-flags=--expose-gc --device-scale-factor=1.5 --num-raster-threads=2 --enable-main-frame-before-activation --renderer-client-id=8 --time-ticks-at-unix-epoch=-1771788186163053 --launch-time-ticks=83611757 --skip-read-main-dll --metrics-shmem-handle=5768,i,8109392421977013235,8277311098177609046,2097152 --field-trial-handle=1840,i,12608030099460488485,1328221396587637362,262144 --variations-seed-version --trace-process-track-uuid=3190708993808206286 --mojo-platform-channel-handle=5772 /prefetch:1"
+    },
+    {
+      "pid": 9988,
+      "name": "CodeSetup-stable-072586267e68ece9a47aa43f8c108e0dcbf44622.tmp",
+      "cpu_percent": 2.6746032550595964,
+      "memory_percent": 0.3186913,
+      "cmdline": "\"C:\\Users\\dell\\AppData\\Local\\Temp\\is-260RR.tmp\\CodeSetup-stable-072586267e68ece9a47aa43f8c108e0dcbf44622.tmp\" /SL5=\"$40486,124481823,841216,C:\\Users\\dell\\AppData\\Local\\Temp\\vscode-stable-user-x64\\CodeSetup-stable-072586267e68ece9a47aa43f8c108e0dcbf44622.exe\" /verysilent /log /update=\"C:\\Users\\dell\\AppData\\Local\\Temp\\vscode-stable-user-x64\\CodeSetup-stable-072586267e68ece9a47aa43f8c108e0dcbf44622.flag\" /sessionend=\"C:\\Users\\dell\\AppData\\Local\\Temp\\vscode-stable-user-x64\\session-ending.flag\" /nocloseapplications /mergetasks=runcode,!desktopicon,!quicklaunchicon"
+    },
+    {
+      "pid": 16132,
+      "name": "msedge.exe",
+      "cpu_percent": 2.5595041373320866,
+      "memory_percent": 1.3413726,
+      "cmdline": "\"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe\" --type=gpu-process --gpu-preferences=SAAAAAAAAADgAAAEAAAAAAAAAAAAAGAAAQAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAACAAAAAAAAAAIAAAAAAAAAA== --startup-read-main-dll --metrics-shmem-handle=2148,i,5640686115924496808,15517386486675298429,262144 --field-trial-handle=2384,i,17055951786160419756,6160005449281271472,262144 --variations-seed-version --trace-process-track-uuid=3190708988185955192 --mojo-platform-channel-handle=2376 /prefetch:2"
+    },
+    {
+      "pid": 11064,
+      "name": "OneDrive.exe",
+      "cpu_percent": 2.126057967443017,
+      "memory_percent": 0.94554424,
+      "cmdline": "\"C:\\Program Files\\Microsoft OneDrive\\OneDrive.exe\" /background"
+    },
+    {
+      "pid": 10664,
+      "name": "gopls.exe",
+      "cpu_percent": 1.9158531839096595,
+      "memory_percent": 1.4145006,
+      "cmdline": "C:\\Users\\dell\\go\\bin\\gopls.exe \"** telemetry **\""
+    },
+    {
+      "pid": 14560,
+      "name": "Code.exe",
+      "cpu_percent": 1.905100889710669,
+      "memory_percent": 1.4322271,
+      "cmdline": "\"C:\\Users\\dell\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe\" \"C:\\Users\\dell\\OneDrive\\Desktop\\go_monitor\""
+    },
+    {
+      "pid": 8440,
+      "name": "Code.exe",
+      "cpu_percent": 1.7196318675118267,
+      "memory_percent": 1.3338859,
+      "cmdline": "\"C:\\Users\\dell\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe\" --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --video-capture-use-gpu-memory-buffer --user-data-dir=\"C:\\Users\\dell\\AppData\\Roaming\\Code\" --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --field-trial-handle=1916,i,14199039253326288532,5100721262909300742,262144 --enable-features=DocumentPolicyIncludeJSCallStacksInCrashReports,EarlyEstablishGpuChannel,EnableTransparentHwndEnlargement,EstablishGpuChannelAsync --disable-features=CalculateNativeWinOcclusion,LocalNetworkAccessChecks,ScreenAIOCREnabled,SpareRendererForSitePerProcess,TraceSiteInstanceGetProcessCreation --variations-seed-version --trace-process-track-uuid=3190708990997080739 --mojo-platform-channel-handle=3896 /prefetch:8"
+    },
+    {
+      "pid": 2232,
+      "name": "explorer.exe",
+      "cpu_percent": 0.5627839367441193,
+      "memory_percent": 1.7483102,
+      "cmdline": "C:\\Windows\\Explorer.EXE"
+    },
+    {
+      "pid": 15488,
+      "name": "msedge.exe",
+      "cpu_percent": 0.5598562266877073,
+      "memory_percent": 0.59086853,
+      "cmdline": "\"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe\" --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --startup-read-main-dll --metrics-shmem-handle=2456,i,8296848212141621078,17962101777394790535,524288 --field-trial-handle=2384,i,17055951786160419756,6160005449281271472,262144 --variations-seed-version --trace-process-track-uuid=3190708989122997041 --mojo-platform-channel-handle=2548 /prefetch:3"
+    },
+    {
+      "pid": 7844,
+      "name": "msedge.exe",
+      "cpu_percent": 0.5394634759526352,
+      "memory_percent": 0.47803697,
+      "cmdline": "\"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe\" --type=renderer --extension-process --renderer-sub-type=extension --pdf-upsell-enabled --video-capture-use-gpu-memory-buffer --lang=en-US --js-flags --device-scale-factor=1.5 --num-raster-threads=2 --enable-main-frame-before-activation --renderer-client-id=43 --time-ticks-at-unix-epoch=-1771788186163054 --launch-time-ticks=14523821062 --ssd-no-pressure-read-main-dll --metrics-shmem-handle=9128,i,17732105479983784776,14345299873784977126,2097152 --field-trial-handle=2384,i,17055951786160419756,6160005449281271472,262144 --variations-seed-version --trace-process-track-uuid=3190709026604671001 --mojo-platform-channel-handle=4612 /prefetch:2"
+    }
+  ],
+  "system_info": {
+    "hostname": "DESKTOP-3H5R52N",
+    "uptime": 14593,
+    "bootTime": 1771788186,
+    "procs": 251,
+    "os": "windows",
+    "platform": "Microsoft Windows 10 Home",
+    "platformFamily": "Standalone Workstation",
+    "platformVersion": "10.0.19045.6466 Build 19045.6466",
+    "kernelVersion": "10.0.19045.6466 Build 19045.6466",
+    "kernelArch": "x86_64",
+    "virtualizationSystem": "",
+    "virtualizationRole": "",
+    "hostId": "4e38d6e8-acea-4376-b70a-d38194e8a209"
+  },
+  "uptime_seconds": 14593
+}

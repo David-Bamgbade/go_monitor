@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server Eye 🖥️👁️ - CPU Spike Detective</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: #667eea;
+        }
+
+        .logo i {
+            margin-right: 10px;
+        }
+
+        .nav-links a {
+            margin-left: 30px;
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 150px 0 100px;
+            background: white;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .terminal {
+            background: #1a1a1a;
+            border-radius: 10px;
+            padding: 20px;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .terminal .prompt {
+            color: #00ff00;
+            margin-bottom: 10px;
+        }
+
+        .terminal .output {
+            color: #fff;
+            margin-left: 20px;
+        }
+
+        .terminal .spike {
+            color: #ff4444;
+            font-weight: bold;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: transform 0.3s;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #667eea;
+            color: #667eea;
+        }
+
+        .btn-outline:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        /* Features */
+        .features {
+            padding: 100px 0;
+            background: #f8f9fa;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 60px;
+            color: #333;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .feature-icon i {
+            font-size: 40px;
+            color: white;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .feature-card p {
+            color: #666;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 24px;
+            font-weight: 800;
+        }
+
+        /* Use Cases Section */
+        .use-cases {
+            padding: 100px 0;
+            background: #f8f9fa;
+        }
+
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .case-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .case-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .case-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .case-header i {
+            font-size: 32px;
+        }
+
+        .case-header h3 {
+            font-size: 20px;
+        }
+
+        .case-body {
+            padding: 25px;
+        }
+
+        .case-body p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .case-quote {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 5px;
+            font-style: italic;
+            margin: 15px 0;
+        }
+
+        .case-quote i {
+            color: #667eea;
+            margin-right: 5px;
+        }
+
+        .case-result {
+            display: flex;
+            gap: 10px;
+            color: #00cc00;
+            font-weight: 600;
+        }
+
+        .case-result i {
+            margin-right: 5px;
+        }
+
+        /* Download Section */
+        .download {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .download .section-title {
+            color: white;
+        }
+
+        .os-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 50px;
+        }
+
+        .os-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: transform 0.3s;
+        }
+
+        .os-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.2);
+        }
+
+        .os-card i {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .os-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .os-card .file-size {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-bottom: 15px;
+        }
+
+        .os-card .download-btn {
+            display: inline-block;
+            padding: 8px 20px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+
+        .os-card .download-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Pricing */
+        .pricing {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .pricing-card {
+            background: #f8f9fa;
+            padding: 40px 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            position: relative;
+            transition: transform 0.3s;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .pricing-card.popular {
+            border: 2px solid #667eea;
+            transform: scale(1.05);
+            background: white;
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .price {
+            font-size: 48px;
+            font-weight: 800;
+            color: #667eea;
+            margin: 20px 0;
+        }
+
+        .price span {
+            font-size: 16px;
+            color: #999;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            margin-bottom: 10px;
+            color: #666;
+        }
+
+        .pricing-features i {
+            width: 20px;
+            margin-right: 10px;
+        }
+
+        .fa-check {
+            color: #00cc00;
+        }
+
+        .fa-times {
+            color: #ff4444;
+        }
+
+        /* Contact */
+        .contact {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .contact-card {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .contact-card h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 20px;
+            margin-top: 20px;
+        }
+
+        .contact-info i {
+            font-size: 24px;
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: #999;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #999;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card.popular {
+                transform: scale(1);
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="fas fa-eye"></i>
+                Server Eye
+            </div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#use-cases">Use Cases</a>
+                <a href="#download">Download</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div>
+                    <h1>Catch CPU Spikes Red-Handed</h1>
+                    <p>Server Eye runs silently in the background. When CPU spikes, it instantly captures exactly what caused it. No more "it was fine when I checked."</p>
+                    <a href="#download" class="btn">Download Free</a>
+                    <a href="#pricing" class="btn btn-outline">Upgrade to Pro - $100</a>
+                </div>
+                <div class="terminal">
+                    <div class="prompt">$ ./server-eye --threshold 85</div>
+                    <div class="output">🚀 Server Eye Started</div>
+                    <div class="output">📊 Threshold: 85%</div>
+                    <div class="output">⏱️ Check interval: 2s</div>
+                    <div class="output spike">🔥 SPIKE DETECTED: 97% at 15:32:04</div>
+                    <div class="output">📁 Capture saved to: spike_20260223_153204/</div>
+                    <div class="output">   ├── top_processes.txt</div>
+                    <div class="output">   ├── snapshot.json</div>
+                    <div class="output">   └── system.log</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">What Server Eye Captures</h2>
+            <p class="section-subtitle">Every spike creates a forensic snapshot with everything you need to debug</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <h3>Top Processes</h3>
+                    <p>Exactly which process spiked your CPU. See PID, name, and CPU percentage at the moment of spike.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-memory"></i>
+                    </div>
+                    <h3>Memory Usage</h3>
+                    <p>Was it a memory leak? Capture RAM usage, swap, and per-process memory at spike time.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-hdd"></i>
+                    </div>
+                    <h3>Disk Activity</h3>
+                    <p>Disk I/O bottlenecks? Capture read/write speeds and disk usage during the spike.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3>Network Connections</h3>
+                    <p>Suspicious traffic? See all active connections, ports, and remote addresses.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-terminal"></i>
+                    </div>
+                    <h3>System Logs</h3>
+                    <p>Kernel errors, OOM killer, cron jobs - capture system logs from the moment of spike.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-code"></i>
+                    </div>
+                    <h3>JSON Snapshot</h3>
+                    <p>All data in structured JSON format for programmatic analysis and alerting.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Download</h3>
+                    <p>One binary. No dependencies. No Python. No install. Just one file.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Run</h3>
+                    <p>./server-eye --threshold 85<br>(Adjustable threshold 0-100)</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Catch Spikes</h3>
+                    <p>When CPU spikes, forensic data is saved automatically. You get proof.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases / Real Stories -->
+    <section id="use-cases" class="use-cases">
+        <div class="container">
+            <h2 class="section-title">Real Stories from Real Users</h2>
+            <p class="section-subtitle">See how Server Eye saved the day for these professionals</p>
+            
+            <div class="cases-grid">
+                <!-- Case 1: Freelance Developer -->
+                <div class="case-card">
+                    <div class="case-header">
+                        <i class="fas fa-laptop-code"></i>
+                        <h3>The Freelance Developer</h3>
+                    </div>
+                    <div class="case-body">
+                        <p><strong>Who:</strong> Ada, runs client apps on a cheap VPS</p>
+                        <p><strong>The problem:</strong> Clients kept saying "your app is slow" but by the time she checked, it was fine. She looked incompetent.</p>
+                        <div class="case-quote">
+                            <i class="fas fa-quote-left"></i> I installed Server Eye. Tuesday 2:14 PM, my phone buzzed. Spike at 95%. Checked the capture - WordPress cron job. Fixed in 5 minutes. Client thinks I'm magic.
+                        </div>
+                        <div class="case-result">
+                            <i class="fas fa-check-circle"></i> Saved her reputation. Got a bonus.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Case 2: DevOps Engineer -->
+                <div class="case-card">
+                    <div class="case-header">
+                        <i class="fas fa-server"></i>
+                        <h3>The DevOps Engineer</h3>
+                    </div>
+                    <div class="case-body">
+                        <p><strong>Who:</strong> Tunde, manages 50 servers for a Nigerian bank</p>
+                        <p><strong>The problem:</strong> Random CPU spikes crashed the mobile banking app. Users complained. Boss demanded answers. He had no evidence.</p>
+                        <div class="case-quote">
+                            <i class="fas fa-quote-left"></i> Server Eye caught it at 3:47 AM. MySQL at 98%, 200+ connections from one IP, backup job running. Moved backup to 2am. App stayed up. Got promoted.
+                        </div>
+                        <div class="case-result">
+                            <i class="fas fa-check-circle"></i> App uptime 99.99%. Promotion secured.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Case 3: SaaS Founder -->
+                <div class="case-card">
+                    <div class="case-header">
+                        <i class="fas fa-cloud"></i>
+                        <h3>The SaaS Founder</h3>
+                    </div>
+                    <div class="case-body">
+                        <p><strong>Who:</strong> Chioma, runs a Nigerian CRM startup with 200 customers</p>
+                        <p><strong>The problem:</strong> Customers complained of random slowness. Support couldn't reproduce. Churn risk was high.</p>
+                        <div class="case-quote">
+                            <i class="fas fa-quote-left"></i> Server Eye Slack alert: 92% spike. Checked capture - one customer's integration had an infinite loop. Called them, fixed their code. They became a reference.
+                        </div>
+                        <div class="case-result">
+                            <i class="fas fa-check-circle"></i> Zero churn. Customer became evangelist.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Case 4: Hospital IT Manager -->
+                <div class="case-card">
+                    <div class="case-header">
+                        <i class="fas fa-hospital"></i>
+                        <h3>The Hospital IT Manager</h3>
+                    </div>
+                    <div class="case-body">
+                        <p><strong>Who:</strong> Dr. Eze, runs IT for a teaching hospital</p>
+                        <p><strong>The problem:</strong> Electronic medical records froze randomly. Doctors reverted to paper. Lives at risk.</p>
+                        <div class="case-quote">
+                            <i class="fas fa-quote-left"></i> Server Eye showed backup running during clinic hours at 85% CPU. Moved to 2am. System never froze again. Patients got better care.
+                        </div>
+                        <div class="case-result">
+                            <i class="fas fa-check-circle"></i> Patient care improved. Doctors trust IT now.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Case 5: E-commerce Owner -->
+                <div class="case-card">
+                    <div class="case-header">
+                        <i class="fas fa-shopping-cart"></i>
+                        <h3>The E-commerce Owner</h3>
+                    </div>
+                    <div class="case-body">
+                        <p><strong>Who:</strong> Femi, runs an online store in Lagos</p>
+                        <p><strong>The problem:</strong> Checkout failed during flash sales. Lost millions monthly.</p>
+                        <div class="case-quote">
+                            <i class="fas fa-quote-left"></i> Black Friday, 12:05 PM - spike alert. Capture showed 1000+ connections from same IP range. Competitor's bot scraping prices. Blocked them. Made ₦5M that day.
+                        </div>
+                        <div class="case-result">
+                            <i class="fas fa-check-circle"></i> Saved ₦5M in one day. Blocked competitor.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Case 6: Hosting Provider -->
+                <div class="case-card">
+                    <div class="case-header">
+                        <i class="fas fa-globe"></i>
+                        <h3>The Hosting Provider</h3>
+                    </div>
+                    <div class="case-body">
+                        <p><strong>Who:</strong> Grace, runs a hosting company with 500 clients</p>
+                        <p><strong>The problem:</strong> Clients blamed HER when THEIR code spiked. She needed proof to avoid refunds.</p>
+                        <div class="case-quote">
+                            <i class="fas fa-quote-left"></i> Client: "Your servers are slow!" Me: "Actually, your WordPress plugin went crazy at 2pm. Here's the proof. Want us to fix it? ₦50,000." They paid.
+                        </div>
+                        <div class="case-result">
+                            <i class="fas fa-check-circle"></i> Turned complaints into ₦50k consulting revenue.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download -->
+    <section id="download" class="download">
+        <div class="container">
+            <h2 class="section-title">Download Server Eye</h2>
+            <p style="text-align: center; margin-bottom: 40px; font-size: 18px;">One binary. Every OS. No dependencies. Free version includes basic monitoring.</p>
+            <div class="os-grid">
+                <div class="os-card">
+                    <i class="fab fa-windows"></i>
+                    <h3>Windows 64-bit</h3>
+                    <div class="file-size">3.2 MB</div>
+                    <a href="#" class="download-btn">Download Free</a>
+                </div>
+                <div class="os-card">
+                    <i class="fab fa-windows"></i>
+                    <h3>Windows 32-bit</h3>
+                    <div class="file-size">3.0 MB</div>
+                    <a href="#" class="download-btn">Download Free</a>
+                </div>
+                <div class="os-card">
+                    <i class="fab fa-linux"></i>
+                    <h3>Linux 64-bit</h3>
+                    <div class="file-size">3.6 MB</div>
+                    <a href="#" class="download-btn">Download Free</a>
+                </div>
+                <div class="os-card">
+                    <i class="fab fa-linux"></i>
+                    <h3>Linux ARM</h3>
+                    <div class="file-size">3.5 MB</div>
+                    <a href="#" class="download-btn">Download Free</a>
+                </div>
+                <div class="os-card">
+                    <i class="fab fa-apple"></i>
+                    <h3>macOS Intel</h3>
+                    <div class="file-size">3.4 MB</div>
+                    <a href="#" class="download-btn">Download Free</a>
+                </div>
+                <div class="os-card">
+                    <i class="fab fa-apple"></i>
+                    <h3>macOS M1/M2</h3>
+                    <div class="file-size">3.4 MB</div>
+                    <a href="#" class="download-btn">Download Free</a>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 40px;">
+                <a href="#" class="btn">Download All Platforms (ZIP) - Free</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <h2 class="section-title">Simple, Fair Pricing</h2>
+            <p class="section-subtitle">One-time payment. Lifetime updates. No subscriptions.</p>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Free</h3>
+                    <div class="price">$0</div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Basic monitoring</li>
+                        <li><i class="fas fa-check"></i> Local captures</li>
+                        <li><i class="fas fa-check"></i> All OS support</li>
+                        <li><i class="fas fa-check"></i> Manual threshold adjustment</li>
+                        <li><i class="fas fa-times"></i> Email alerts</li>
+                        <li><i class="fas fa-times"></i> Slack integration</li>
+                        <li><i class="fas fa-times"></i> 30-day history</li>
+                    </ul>
+                    <a href="#download" class="btn btn-outline">Download Free</a>
+                </div>
+                
+                <div class="pricing-card popular">
+                    <div class="popular-badge">Best Value</div>
+                    <h3>Pro</h3>
+                    <div class="price">$100 <span>one-time</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Everything in Free</li>
+                        <li><i class="fas fa-check"></i> Email alerts</li>
+                        <li><i class="fas fa-check"></i> Slack/Discord webhooks</li>
+                        <li><i class="fas fa-check"></i> 30-day capture history</li>
+                        <li><i class="fas fa-check"></i> Priority email support</li>
+                        <li><i class="fas fa-check"></i> Lifetime updates</li>
+                        <li><i class="fas fa-check"></i> Commercial license</li>
+                    </ul>
+                    <a href="#" class="btn">Buy Now - $100</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <h3>Enterprise</h3>
+                    <div class="price">$499 <span>one-time</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Everything in Pro</li>
+                        <li><i class="fas fa-check"></i> Multi-server dashboard</li>
+                        <li><i class="fas fa-check"></i> API access</li>
+                        <li><i class="fas fa-check"></i> Custom integrations</li>
+                        <li><i class="fas fa-check"></i> 24/7 phone support</li>
+                        <li><i class="fas fa-check"></i> On-prem dashboard</li>
+                        <li><i class="fas fa-check"></i> Team training session</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-outline">Contact Sales</a>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 30px; color: #666;">
+                <i class="fas fa-shield-alt"></i> 30-day money-back guarantee. No questions asked.
+            </p>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-card">
+                <h3>Get in Touch</h3>
+                <p>Questions? Need help? Want a custom feature? I'm here to help.</p>
+                <div class="contact-info">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:davidbamgbade082@gmail.com">davidbamgbade082@gmail.com</a>
+                </div>
+                <p style="margin-top: 20px; opacity: 0.9;">I respond within 24 hours, usually faster</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-logo">
+                        <i class="fas fa-eye"></i> Server Eye
+                    </div>
+                    <p style="color: #999;">Catch CPU spikes red-handed. Get proof. Fix fast.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Product</h4>
+                    <a href="#features">Features</a>
+                    <a href="#how-it-works">How It Works</a>
+                    <a href="#use-cases">Use Cases</a>
+                    <a href="#download">Download</a>
+                    <a href="#pricing">Pricing</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Support</h4>
+                    <a href="#contact">Contact</a>
+                    <a href="#">Documentation</a>
+                    <a href="#">FAQ</a>
+                    <a href="#">GitHub</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Legal</h4>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">License</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 Server Eye. Created by David Bamgbade. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
